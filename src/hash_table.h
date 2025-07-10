@@ -13,6 +13,9 @@ typedef struct {
 //function to initialize hash table
 ht_hash_table *ht_init();
 
+//function to delete hash table
+void ht_del_hash_table(ht_hash_table *ht);
+
 //function to add item to hash table
 static ht_item *ht_add_item(const char *k, const char *v);
 
