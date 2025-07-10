@@ -22,3 +22,11 @@ static ht_item *ht_add_item(const char *k, const char *v) {
     i->value = strdup(v);
     return i;
 }
+
+//remove item from hash table
+static void ht_del_item(ht_item *i) {
+    free(i->key);
+    free(i->value); 
+    free(i);
+}
+

@@ -15,3 +15,6 @@ ht_hash_table *ht_init();
 
 //function to add item to hash table
 static ht_item *ht_add_item(const char *k, const char *v);
+
+//function to remove item from hash table
+static void ht_del_item(ht_item *i);
