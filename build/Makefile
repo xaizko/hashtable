@@ -1,6 +1,6 @@
 CC = gcc
 OUTPUT = -o hash_test
-SRC = hash_table.c main.c
+SRC = ./src/hash_table.c ./src/main.c
 
 all:
 	$(CC) $(SRC) $(OUTPUT)
