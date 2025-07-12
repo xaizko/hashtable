@@ -23,7 +23,7 @@ static ht_item *ht_new_item(const char *k, const char *v);
 static void ht_del_item(ht_item *i);
 
 //function to hash
-static int ht_hash(char *s, const int a, const int m);
+static int ht_hash(const char *s, const int a, const int m);
 
 //function to double hash to avoid collision
 static int ht_get_hash(const char *s, int num_buckets, const int attempt);

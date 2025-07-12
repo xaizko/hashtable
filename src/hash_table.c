@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "hash_table.h"
 
 #define HT_DEFAULT_SIZE 53
@@ -50,7 +51,7 @@ void ht_del_hash_table(ht_hash_table *ht) {
 s is the string, a is a prime number larger than the size of the alphabet
 m is the desired bucket array length
 */
-static int ht_hash(char *s, const int a, const int m) {
+static int ht_hash(const char *s, const int a, const int m) {
     long hash = 0;
     const int len_s = strlen(s);
     for (int i = 0; i < len_s; i++) {
