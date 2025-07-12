@@ -21,3 +21,6 @@ static ht_item *ht_add_item(const char *k, const char *v);
 
 //function to remove item from hash table
 static void ht_del_item(ht_item *i);
+
+//function to hash
+static int ht_hash(char *s, const int a, const int m);
