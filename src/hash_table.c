@@ -18,7 +18,7 @@ ht_hash_table *ht_init() {
 }
 
 //add item to hash table
-static ht_item *ht_add_item(const char *k, const char *v) {
+static ht_item *ht_new_item(const char *k, const char *v) {
     ht_item *i = malloc(sizeof(ht_item));
     i->key = strdup(k);
     i->value = strdup(v);
