@@ -3,6 +3,8 @@
 #include "hash_table.h"
 
 #define HT_DEFAULT_SIZE 53
+#define HT_PRIME_1 167
+#define HT_PRIME_2 199 
 
 //initialize hash table
 ht_hash_table *ht_init() {
@@ -56,4 +58,11 @@ static int ht_hash(char *s, const int a, const int m) {
         hash = hash % m;
     }
     return (int)hash;
+}
+
+//function to get hash
+static int ht_get_hash(const char *s, int num_buckets, const int attempt) {
+    const int hash_a = ht_hash(s, HT_PRIME_1, num_buckets);
+    const int hash_b = ht_hash(s, HT_PRIME_2, num_buckets);
+    return (hash_a + (attempt * (hash_b + 1))) % num_buckets;
 }
