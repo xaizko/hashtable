@@ -11,13 +11,7 @@ static ht_item HT_DELETED_ITEM = {NULL, NULL};
 
 //initialize hash table
 ht_hash_table *ht_init() {
-    ht_hash_table *ht = malloc(sizeof(ht_hash_table));
-
-    ht->size = HT_DEFAULT_SIZE;
-    ht->count = 0;
-    ht->items = calloc((size_t)ht->size, sizeof(ht_item*));
-    
-    return ht;
+   return ht_new_sized(HT_DEFAULT_SIZE); 
 }
 
 //add item to hash table
@@ -127,4 +121,16 @@ void ht_delete(ht_hash_table *ht, const char *key) {
         i++;
     }
     ht->count--;
+}
+
+//function to create a new hash table with a specified base size
+static ht_hash_table *ht_new_sized(const int base_size) {
+    ht_hash_table *ht = xmalloc(sizeof(ht_hash_table));
+    ht->base_size = base_size;
+
+    ht->size = next_prime(ht->base_size);
+    
+    ht->count = 0;
+    ht->items = xcalloc((size_t)ht->size, sizeof(ht_item*));
+    return ht;
 }

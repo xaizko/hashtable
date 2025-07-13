@@ -7,6 +7,7 @@ typedef struct {
 typedef struct {
     int size; 
     int count;
+    int base_size;
     ht_item **items;
 } ht_hash_table;
 
@@ -36,3 +37,6 @@ char *ht_search(ht_hash_table *ht, const char *key);
 
 //function to delete from hash table
 void ht_delete(ht_hash_table *ht, const char *key);
+
+//function to create a new hash table with a specified base size
+static ht_hash_table *ht_new_sized(const int base_size);
