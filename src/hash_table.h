@@ -30,3 +30,6 @@ static int ht_get_hash(const char *s, int num_buckets, const int attempt);
 
 //function to insert into hash table
 void ht_insert(ht_hash_table *ht, const char *key, const char *value);
+
+//function to search hash table
+char *ht_search(ht_hash_table *ht, const char *key);
