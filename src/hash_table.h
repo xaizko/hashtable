@@ -43,3 +43,10 @@ static ht_hash_table *ht_new_sized(const int base_size);
 
 //function to resize the hash table
 static void ht_resize(ht_hash_table *ht, const int base_size);
+
+//function to resize the hash table when it grows
+static void ht_resize_up(ht_hash_table *ht);
+
+
+//function to resize the hash table when it shrinks
+static void ht_resize_down(ht_hash_table *ht);

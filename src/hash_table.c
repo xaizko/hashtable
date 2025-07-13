@@ -66,6 +66,11 @@ static int ht_get_hash(const char *s, int num_buckets, const int attempt) {
 
 //insert into hash table
 void ht_insert(ht_hash_table *ht, const char *key, const char *value) {
+    const int load = ht->count *100 / ht->size;
+    if (load > 70) {
+        ht_resize_up(ht);
+    }
+
     ht_item *item = ht_new_item(key, value);
     int index = ht_get_hash(item->key, ht->size, 0);
     ht_item *cur_item = ht->items[index];
@@ -106,6 +111,11 @@ char *ht_search(ht_hash_table *ht, const char *key) {
 
 //function to delete from hash table
 void ht_delete(ht_hash_table *ht, const char *key) {
+    const int load = ht->count * 100 / ht->size;
+    if (load < 10) {
+        ht_resize_down(ht);
+    }
+
     int index = ht_get_hash(key, ht->size, 0);
     ht_item *item = ht->items[index];
     int i = 1;
@@ -156,4 +166,14 @@ static void ht_resize(ht_hash_table *ht, const int base_size) {
     new_ht->size = tmp_size;
 
     ht_del_hash_table(new_ht);
+}
+
+static void ht_resize_up(ht_hash_table *ht) {
+    const int new_size = ht->base_size * 2;
+    ht_resize(ht, new_size);
+}
+
+static void ht_resize_down(ht_hash_table *ht) {
+    const int new_size = ht->base_size /2;
+    ht_resize(ht, new_size);
 }
