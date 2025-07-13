@@ -134,3 +134,26 @@ static ht_hash_table *ht_new_sized(const int base_size) {
     ht->items = xcalloc((size_t)ht->size, sizeof(ht_item*));
     return ht;
 }
+
+//function to resize the hash table
+static void ht_resize(ht_hash_table *ht, const int base_size) {
+    if (base_size < HT_DEFAULT_SIZE) {
+        return;
+    }
+    ht_hash_table *new_ht = ht_new_sized(base_size);
+    for (int i = 0; i < ht->size; i++) {
+        ht_item *item = ht->items[i];
+        if (item != NULL && item != &HT_DELETED_ITEM) {
+            ht_insert(new_ht, item->key, item->value);
+        }
+    }
+
+    ht->base_size = new_ht->base_size;
+    ht->count = new_ht->count;
+
+    const int tmp_size = ht->size;
+    ht->size = new_ht->size;
+    new_ht->size = tmp_size;
+
+    ht_del_hash_table(new_ht);
+}

@@ -40,3 +40,6 @@ void ht_delete(ht_hash_table *ht, const char *key);
 
 //function to create a new hash table with a specified base size
 static ht_hash_table *ht_new_sized(const int base_size);
+
+//function to resize the hash table
+static void ht_resize(ht_hash_table *ht, const int base_size);
