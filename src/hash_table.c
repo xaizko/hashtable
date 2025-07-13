@@ -2,6 +2,7 @@
 #include <string.h>
 #include <math.h>
 #include "hash_table.h"
+#include "prime.h"
 
 #define HT_DEFAULT_SIZE 53
 #define HT_PRIME_1 167
@@ -135,13 +136,13 @@ void ht_delete(ht_hash_table *ht, const char *key) {
 
 //function to create a new hash table with a specified base size
 static ht_hash_table *ht_new_sized(const int base_size) {
-    ht_hash_table *ht = xmalloc(sizeof(ht_hash_table));
+    ht_hash_table *ht = malloc(sizeof(ht_hash_table));
     ht->base_size = base_size;
 
     ht->size = next_prime(ht->base_size);
     
     ht->count = 0;
-    ht->items = xcalloc((size_t)ht->size, sizeof(ht_item*));
+    ht->items = calloc((size_t)ht->size, sizeof(ht_item*));
     return ht;
 }
 
