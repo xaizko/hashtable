@@ -33,3 +33,6 @@ void ht_insert(ht_hash_table *ht, const char *key, const char *value);
 
 //function to search hash table
 char *ht_search(ht_hash_table *ht, const char *key);
+
+//function to delete from hash table
+void ht_delete(ht_hash_table *ht, const char *key);

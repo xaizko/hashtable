@@ -7,6 +7,8 @@
 #define HT_PRIME_1 167
 #define HT_PRIME_2 199 
 
+static ht_item HT_DELETED_ITEM = {NULL, NULL};
+
 //initialize hash table
 ht_hash_table *ht_init() {
     ht_hash_table *ht = malloc(sizeof(ht_hash_table));
@@ -96,4 +98,22 @@ char *ht_search(ht_hash_table *ht, const char *key) {
         i++;
     }
     return NULL;
+}
+
+void ht_delete(ht_hash_table *ht, const char *key) {
+    int index = ht_get_hash(key, ht->size, 0);
+    ht_item *item = ht->items[index];
+    int i = 1;
+    while (item != NULL) {
+        if (item != &HT_DELETED_ITEM) {
+            if (!strcmp(item->key, key)) {
+                ht_del_item(item);
+                ht->items[index] = &HT_DELETED_ITEM;
+            }
+        }
+        index = ht_get_hash(key, ht->size, i);
+        item = ht->items[index];
+        i++;
+    }
+    ht->count--;
 }
